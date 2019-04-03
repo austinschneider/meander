@@ -72,7 +72,8 @@ def connect_line_segments(lines):
 
     return polygons
 
-def get_contours(sample_points, samples, level):
+def compute_contours(sample_points, samples, level):
+    """ Compute contours (iso-lines of a scalar field) in a 2d cartesian space """
     # compute the delaunay triangulation so we have a set of
     # triangles to run the meandering triangles algorithm on
     tri = scipy.spatial.Delaunay(sample_points)
