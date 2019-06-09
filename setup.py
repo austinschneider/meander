@@ -6,7 +6,7 @@ def readme():
 
 setup(
         name='meander',
-        version='0.0.2',
+        version='0.0.3',
         description='Tools for computing contours on 2d surfaces.',
         long_description=readme(),
         url='https://github.com/austinschneider/meander',
@@ -14,6 +14,6 @@ setup(
         author_email='austin.schneider@icecube.wisc.edu',
         license='LGPL-3.0',
         packages=['meander'],
-        zip_safe=True
+        zip_safe=True,
     )
 
