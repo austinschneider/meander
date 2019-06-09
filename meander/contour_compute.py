@@ -18,8 +18,9 @@ def connect_line_segments(lines):
             break
 
         # pop a point, and a line segment that contains the point
-        p0 = l_dict.keys()[0]
-        l0 = l_dict[p0][0]
+        p0, l_dict_entry = l_dict.popitem()
+
+        l0 = l_dict_entry[0]
 
         # find the other point in that line segment
         p1 = [p for p in lines[l0] if p != p0][0]
@@ -27,12 +28,6 @@ def connect_line_segments(lines):
         # start the polygon
         polygon.append(p0)
         polygon.append(p1)
-
-        # store the first line segment
-        l_dict_entry = l_dict[p0]
-
-        # delete the point that we've already handled
-        del l_dict[p0]
 
         # next
         p0 = p1
