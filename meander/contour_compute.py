@@ -106,9 +106,9 @@ def _simplex_intersections(samples, levels, simplices):
             # skip triangles thar are all above or all below the level
             # for triangles spanning the level, get the lines that cross the level
             if b_sum == 1:
-                line_indices = np.array([l_to_li[l] for l in these_lines])[np.array([i for i in xrange(3) if i != np.argmax(b)])]
+                line_indices = np.array([l_to_li[l] for l in these_lines])[np.array([i for i in range(3) if i != np.argmax(b)])]
             elif b_sum == 2:
-                line_indices = np.array([l_to_li[l] for l in these_lines])[np.array([i for i in xrange(3) if i != np.argmin(b)])]
+                line_indices = np.array([l_to_li[l] for l in these_lines])[np.array([i for i in range(3) if i != np.argmin(b)])]
             else:
                 continue
             simplex_lines[level_i].append(tuple(sorted(line_indices)))
