@@ -133,6 +133,18 @@ def _spherical_geodesic(p0, p1, x):
     # where theta and phi are the polar and azimuthal angles respectively measured in radians
     assert(x >= 0.0 and x <= 1.0)
     v0, v1 = [np.array((np.cos(phi)*np.sin(theta), np.sin(phi)*np.sin(theta), np.cos(theta))) for theta, phi in [p0, p1]]
+    v5 = v0*(1.-x) + v1*x
+    v5 = v5 / np.sqrt(np.sum(v5*v5))
+    p = (np.arccos(v5[2]), np.arctan2(v5[1], v5[0]))
+
+    return p
+"""
+def _spherical_geodesic(p0, p1, x):
+    # This function describes the geodesic between p0 and p1 on a unit sphere
+    # p0 and p1 are assumed to be of the form (theta0, phi0) and (theta1, phi1)
+    # where theta and phi are the polar and azimuthal angles respectively measured in radians
+    assert(x >= 0.0 and x <= 1.0)
+    v0, v1 = [np.array((np.cos(phi)*np.sin(theta), np.sin(phi)*np.sin(theta), np.cos(theta))) for theta, phi in [p0, p1]]
     c = np.sqrt(np.sum((v1-v0)**2))
     theta = 2.0*np.arcsin(c/2.0)
     theta0 = x*theta
@@ -147,7 +159,17 @@ def _spherical_geodesic(p0, p1, x):
     v3 = v3 / np.sqrt(np.sum(v3**2.0))
 
     p = (np.arccos(v3[2]), np.arctan2(v3[1], v3[0]))
+
+    v4 = v0*x + v1*(1.-x)
+    v4 = v4 / np.sqrt(np.sum(v4*v4))
+    pp = (np.arccos(v4[2]), np.arctan2(v4[1], v4[0]))
+    v5 = v0*(1.-x) + v1*x
+    v5 = v5 / np.sqrt(np.sum(v5*v5))
+    ppp = (np.arccos(v5[2]), np.arctan2(v5[1], v5[0]))
+
+    print(p, pp, ppp)
     return p
+"""
 
 def _interpolate_simplex_intersections(sample_points, samples, levels, simplex_intersections_by_level, geodesic=_planar_geodesic):
     contours_by_level = []
