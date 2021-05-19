@@ -170,19 +170,20 @@ def _interpolate_simplex_intersections(sample_points, samples, levels, simplex_i
     contours_by_level = []
     for level_i, level in enumerate(levels):
         connected_line_segments = simplex_intersections_by_level[level_i]
-        lines_in_contours = np.unique([line for index_contour in connected_line_segments for line in index_contour], axis=0)
+        if len(connected_line_segments)!=0:
+           lines_in_contours = np.unique([line for index_contour in connected_line_segments for line in index_contour], axis=0)
 
-        line_ps = dict()
+           line_ps = dict()
 
-        for line in lines_in_contours:
-            line = tuple(line)
-            p0, p1 = line
-            (p0, y0), (p1, y1) = sorted([(p0, samples[p0]), (p1, samples[p1])], key=lambda x: x[1])
-            x = (level-y0) / (y1-y0)
-            p = geodesic(sample_points[p0], sample_points[p1], x)
-            line_ps[line] = p
+           for line in lines_in_contours:
+             line = tuple(line)
+             p0, p1 = line
+             (p0, y0), (p1, y1) = sorted([(p0, samples[p0]), (p1, samples[p1])], key=lambda x: x[1])
+             x = (level-y0) / (y1-y0)
+             p = geodesic(sample_points[p0], sample_points[p1], x)
+             line_ps[line] = p
 
-        contours_by_level.append([np.array([line_ps[tuple(li)] for li in index_contour]) for index_contour in connected_line_segments])
+           contours_by_level.append([np.array([line_ps[tuple(li)] for li in index_contour]) for index_contour in connected_line_segments])
     return contours_by_level
 
 def _compute_planar_simplices(sample_points):
