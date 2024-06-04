@@ -14,6 +14,7 @@ setup(
         author_email='austin.schneider@icecube.wisc.edu',
         license='LGPL-3.0',
         packages=['meander'],
+        install_requires=['numpy', 'scipy'],
         zip_safe=True,
     )
 
