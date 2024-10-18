@@ -170,7 +170,11 @@ def _interpolate_simplex_intersections(sample_points, samples, levels, simplex_i
     contours_by_level = []
     for level_i, level in enumerate(levels):
         connected_line_segments = simplex_intersections_by_level[level_i]
-        lines_in_contours = np.unique([line for index_contour in connected_line_segments for line in index_contour], axis=0)
+        lines_in_contours = [line for index_contour in connected_line_segments for line in index_contour]
+        if len(lines_in_contours) == 0:
+            contours_by_level.append([])
+            continue
+        lines_in_contours = np.unique(lines_in_contours, axis=0)
 
         line_ps = dict()
 
